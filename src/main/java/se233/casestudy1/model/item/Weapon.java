@@ -17,15 +17,7 @@ public class Weapon extends BasedEquipment{
     public int getPower(){
         return power;
     }
-    public void setPower(int power){
-        this.power = power;
-    }
-    public void setDamagetype(Damagetype damagetype) {
-        this.damagetype = damagetype;
-    }
-    public Damagetype getDamagetype(){
-        return damagetype;
-    }
+
     @Override
     public String toString(){
         return name;

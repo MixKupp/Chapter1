@@ -13,8 +13,8 @@ public class MagicalCharacter extends BasedCharacter{
         this.basedRes = basedRes;
         this.hp = this.fullHp;
         this.power = this.basedPow;
-        this.defense = basedDef;
-        this.resistance = basedRes;
+        this.defense = this.basedDef;
+        this.resistance = this.basedRes;
 
     }
 }

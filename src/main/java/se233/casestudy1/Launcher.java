@@ -2,7 +2,6 @@ package se233.casestudy1;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -15,7 +14,6 @@ import se233.casestudy1.model.item.Weapon;
 import se233.casestudy1.view.CharacterPane;
 import se233.casestudy1.view.EquipPane;
 import se233.casestudy1.view.InventoryPane;
-
 import java.util.ArrayList;
 
 public class Launcher extends Application {
@@ -83,6 +81,16 @@ public class Launcher extends Application {
 
     public static void setInventoryPane(InventoryPane inventoryPane) {
         Launcher.inventoryPane = inventoryPane;
+    }
+
+    public static void  unEquip(){
+        BasedCharacter character = Launcher.getMainCharacter();
+        Launcher.setEquippedWeapon(null);
+        Launcher.setEquippedArmor(null);
+        Launcher.getMainCharacter().unEquipWeapon();
+        Launcher.getMainCharacter().unEquipArmor();
+        Launcher.setAllEquipment(GenItemList.setUpItemList());
+        Launcher.refreshPane();
     }
 
     public Pane getMainPane(){

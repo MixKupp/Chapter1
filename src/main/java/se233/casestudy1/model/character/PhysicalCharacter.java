@@ -12,8 +12,8 @@ public class PhysicalCharacter extends BasedCharacter{
         this.basedRes = basedRes;
         this.basedDef = basedDef;
         this.hp =this.fullHp;
-        this.power = basedPow;
-        this.defense = basedDef;
-        this.resistance = basedRes;
+        this.power = this.basedPow;
+        this.defense = this.basedDef;
+        this.resistance = this.basedRes;
     }
 }

@@ -14,15 +14,11 @@ public class Armor extends BasedEquipment{
     public int getDefense() {
         return defense;
     }
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
+
     public int getResistance() {
         return resistance;
     }
-    public void setResistance(int resistance){
-        this.resistance = resistance;
-    }
+
     @Override
     public String toString(){
         return name;
