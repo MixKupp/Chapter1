@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.StackPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import se233.casestudy1.Launcher;
 import se233.casestudy1.model.Damagetype;
 import se233.casestudy1.model.character.BasedCharacter;
@@ -19,6 +21,9 @@ import java.util.ArrayList;
 
 public class AllCustomHandler {
     public static class GenCharacterHandler implements EventHandler<ActionEvent> {
+
+        public static Logger logger = LogManager.getLogger(AllCustomHandler.class);
+
         @Override
         public void handle(ActionEvent event) {
             Launcher.setMainCharacter(GenCharacter.setUpCharacter());
@@ -41,15 +46,13 @@ public class AllCustomHandler {
 
         public static void onDragOver(DragEvent event, String type) {
             Dragboard dragboard = event.getDragboard();
-            BasedEquipment retrievedEquipment = (BasedEquipment) dragboard.getContent(BasedEquipment.DATA_FORMAT);
+            BasedEquipment retrievedEquipment = (BasedEquipment)dragboard.getContent(BasedEquipment.DATA_FORMAT);
             if (dragboard.hasContent(BasedEquipment.DATA_FORMAT) && retrievedEquipment.getClass().getSimpleName().equals(type)) {
-                if (retrievedEquipment.getClass().getSimpleName().equals("Weapon") && (retrievedEquipment.getDmtype() == Launcher.getMainCharacter().getType())) {
+                if (retrievedEquipment.getClass().getSimpleName().equals("Weapon") && (retrievedEquipment.getDamagetype() == Launcher.getMainCharacter().getType())) {
                     event.acceptTransferModes(TransferMode.MOVE);
-                } else if (retrievedEquipment.getClass().getSimpleName().equals("Weapon") && (Launcher.getMainCharacter().getType() == Damagetype.magi)) {
+                } else if (retrievedEquipment.getClass().getSimpleName().equals("Weapon") && (Launcher.getMainCharacter().getType() == Damagetype.magi )) {
                     event.acceptTransferModes(TransferMode.MOVE);
                 } else if (retrievedEquipment.getClass().getSimpleName().equals("Armor") && (Launcher.getMainCharacter().getType() != Damagetype.magi)) {
-                    event.acceptTransferModes(TransferMode.MOVE);
-                }else{
                     event.acceptTransferModes(TransferMode.MOVE);
                 }
             }
@@ -60,7 +63,7 @@ public class AllCustomHandler {
             Dragboard dragboard = event.getDragboard();
             ArrayList<BasedEquipment> allEquipments = Launcher.getAllEquipment();
             if (dragboard.hasContent(BasedEquipment.DATA_FORMAT)) {
-                BasedEquipment retrievedEquipment = (BasedEquipment) dragboard.getContent(BasedEquipment.DATA_FORMAT);
+                BasedEquipment retrievedEquipment = (BasedEquipment)dragboard.getContent(BasedEquipment.DATA_FORMAT);
                 BasedCharacter character = Launcher.getMainCharacter();
                 if (retrievedEquipment.getClass().getSimpleName().equals("Weapon")) {
                     if (Launcher.getEquippedWeapon() != null) {
@@ -68,12 +71,15 @@ public class AllCustomHandler {
                     }
                     Launcher.setEquippedWeapon((Weapon) retrievedEquipment);
                     character.equipWeapon((Weapon) retrievedEquipment);
+                    logger.info("{} equiped", retrievedEquipment.getName());
+
                 } else if (retrievedEquipment.getClass().getSimpleName().equals("Armor")) {
                     if (Launcher.getEquippedArmor() != null) {
                         allEquipments.add(Launcher.getEquippedArmor());
                     }
                     Launcher.setEquippedArmor((Armor) retrievedEquipment);
                     character.equipArmor((Armor) retrievedEquipment);
+                    logger.info("{} equipped", retrievedEquipment.getName());
                 }
                 Launcher.setMainCharacter(character);
                 Launcher.setAllEquipment(allEquipments);

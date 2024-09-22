@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class BasedEquipment implements Serializable {
     protected String name;
     protected String imgpath;
-    protected Damagetype dmtype;
+    protected Damagetype damagetype;
 
-    public Damagetype getDmtype() {
-        return dmtype;
+    public Damagetype getDamagetype() {
+        return damagetype;
     }
 
     public String getName(){

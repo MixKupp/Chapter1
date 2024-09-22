@@ -14,6 +14,10 @@ public class Weapon extends BasedEquipment{
 
     }
 
+    public Damagetype getDamagetype() {
+        return damagetype;
+    }
+
     public int getPower(){
         return power;
     }
